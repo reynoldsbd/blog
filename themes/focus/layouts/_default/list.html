@@ -1,0 +1,7 @@
+{{ define "main" }}
+    {{ partial "content" . }}
+
+    {{ range .Pages }}
+        {{ .Render "summary" }}
+    {{ end }}
+{{ end }}

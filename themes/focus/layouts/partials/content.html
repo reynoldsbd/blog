@@ -1,0 +1,11 @@
+<article class="content">
+{{ if ne .Title "" }}
+    <header><h1>{{ .Title }}</h1></header>
+    {{ if .IsPage }}
+    <p class="heading">{{ .Date.Format "Jan 2, 2006" }}</p>
+    {{ end }}
+    <hr />
+{{ end }}
+
+    {{ .Content }}
+</article>

@@ -1,0 +1,15 @@
+<div class="card focus-summary">
+    <div class="card-header">
+        <a class="card-header-title" href="{{ .Permalink }}">
+            <p>{{ .Title }}</p>
+            <p class="heading">{{ .Date.Format "Jan 2, 2006" }}</p>
+        </a>
+    </div>
+    <div class="card-content">
+        <div class="content">
+            {{ .Summary }}
+
+            <a class="read-more" href="{{ .Permalink }}">Read more...</a>
+        </div>
+    </div>
+</div>

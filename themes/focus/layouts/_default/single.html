@@ -1,0 +1,23 @@
+{{ define "main" }}
+    <div class="columns">
+        <div class="column">
+            {{ partial "content" . }}
+        </div>
+
+        <div class="column is-narrow">
+            <aside class="menu">
+                <p class="menu-label">
+                    On this page:
+                </p>
+                {{ .TableOfContents }}
+            </aside>
+        </div>
+        {{/*
+        TODO: better styling, maybe try to replicate and/or reuse Bulma's .menu
+
+        According to this thread, the ability to render a customized ToC is pending an overall
+        upgrade to blackfriday v2:
+        https://github.com/gohugoio/hugo/issues/1778
+        */}}
+    </div>
+{{ end }}

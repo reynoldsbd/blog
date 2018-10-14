@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        {{ $focusCss := resources.Get "sass/focus.scss" | toCSS | minify }}
+        <link rel="stylesheet" href="{{ $focusCss.Permalink }}">
+
+        <title>
+            {{ block "title" . }}
+                {{ if ne .Title "" }}
+                    {{ .Title }} -
+                {{ end }}
+                {{ .Site.Title }}
+            {{ end }}
+        </title>
+    </head>
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item is-size-5 has-text-weight-semibold" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+                    {{/* TODO: custom logo */}}
+
+                    <div class="navbar-burger" role="button" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                        {{ range .Site.Menus.main }}
+                        <a class="navbar-item" href="{{ .URL }}">{{ .Name }}</a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section class="section">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-10 is-offset-1">
+                        {{ block "main" . }}{{ end }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{/* TODO: footer fixed to bottom */}}
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        {{ $focusJs := resources.Get "js/focus.js" | minify }}
+        <script src="{{ $focusJs.Permalink }}"></script>
+    </body>
+</html>

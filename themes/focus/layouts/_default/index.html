@@ -1,0 +1,11 @@
+{{ define "main" }}
+    {{ partial "content" . }}
+
+    <article class="content">
+        <header><h1>Recent Posts:</h1></header>
+    </article>
+
+    {{ range (where .Site.RegularPages "Section" "posts") }}
+        {{ .Render "summary" }}
+    {{ end }}
+{{ end }}
