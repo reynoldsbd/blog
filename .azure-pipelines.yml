@@ -1,16 +1,19 @@
+# Windows host required for the AzureFileCopy@2 task
 pool:
   vmImage: 'vs2017-win2016'
 
+# Retrieve the hugo executable
 steps:
 - powershell: |
     Invoke-WebRequest -Uri $(HugoReleasePath) -O $(Build.BinariesDirectory)/hugo.zip
     Expand-Archive -LiteralPath $(Build.BinariesDirectory)/hugo.zip -DestinationPath $(Build.BinariesDirectory)
   displayName: 'Get Hugo'
 
-- script: |
-    $(Build.BinariesDirectory)/hugo.exe -d $(Build.StagingDirectory)
+# Build site contents
+- script: $(Build.BinariesDirectory)/hugo.exe -d $(Build.StagingDirectory)
   displayName: 'Build Site Contents'
 
+# Copy contents to Azure blob
 - task: AzureFileCopy@2
   displayName: 'Publish Site Contents'
   inputs:
@@ -20,4 +23,3 @@ steps:
     destination: azureBlob
     storage: reynoldsbd
     containerName: www
-    #additionalArgumentsForBlobCopy
