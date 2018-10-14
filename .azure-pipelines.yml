@@ -1,0 +1,23 @@
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+steps:
+- script: |
+    wget $(HugoReleasePath) -O $(Build.BinariesDirectory)/hugo.tar.gz
+    tar -xOvzf $(Build.BinariesDirectory)/hugo.tar.gz > $(Build.BinariesDirectory)/hugo
+  displayName: 'Get Hugo'
+
+- script: |
+    $(Build.BinariesDirectory)/hugo -d $(Build.StagingDirectory)
+  displayName: 'Build Site Contents'
+
+- task: AzureFileCopy@2
+  displayName: 'Publish Site Contents'
+  inputs:
+    sourcePath: $(Build.StagingDirectory)
+    azureConnectionType: connectedServiceNameARM
+    azureSubscription: default
+    destination: azureBlob
+    storage: reynoldsbd
+    containerName: www
+    #additionalArgumentsForBlobCopy
