@@ -2,7 +2,7 @@ pool:
   vmImage: 'vs2017-win2016'
 
 steps:
-- script: |
+- powershell: |
     Invoke-WebRequest -Uri $(HugoReleasePath) -O $(Build.BinariesDirectory)/hugo.zip
     Extract-Archive -LiteralPath $(Build.BinariesDirectory)/hugo.zip -DestinationPath $(Build.BinariesDirectory)
   displayName: 'Get Hugo'
