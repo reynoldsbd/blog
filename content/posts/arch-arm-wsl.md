@@ -1,7 +1,7 @@
 ---
 title: "Arch ARM Images in WSL"
 date: 2018-09-01T08:55:55-07:00
-draft: true
+draft: false
 ---
 
 Creating a bootable [Arch ARM][arch-arm] image on Windows is possible using the

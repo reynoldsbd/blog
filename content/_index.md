@@ -8,4 +8,4 @@ technical writing on subjects I find interesting. You can also find some informa
 and my work history.
 
 
-[0.1]: about
+[0.1]: {{< relref path="about" >}}
