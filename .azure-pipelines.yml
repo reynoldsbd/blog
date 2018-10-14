@@ -1,15 +1,14 @@
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: 'vs2017-win2016'
 
 steps:
 - script: |
-    wget $(HugoReleasePath) -O $(Build.BinariesDirectory)/hugo.tar.gz
-    tar -xOvzf $(Build.BinariesDirectory)/hugo.tar.gz hugo > $(Build.BinariesDirectory)/hugo
-    chmod +x $(Build.BinariesDirectory)/hugo
+    Invoke-WebRequest -Uri $(HugoReleasePath) -O $(Build.BinariesDirectory)/hugo.zip
+    Extract-Archive -LiteralPath $(Build.BinariesDirectory)/hugo.zip -DestinationPath $(Build.BinariesDirectory)
   displayName: 'Get Hugo'
 
 - script: |
-    $(Build.BinariesDirectory)/hugo -d $(Build.StagingDirectory)
+    $(Build.BinariesDirectory)/hugo.exe -d $(Build.StagingDirectory)
   displayName: 'Build Site Contents'
 
 - task: AzureFileCopy@2
