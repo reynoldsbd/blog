@@ -5,6 +5,7 @@ steps:
 - script: |
     wget $(HugoReleasePath) -O $(Build.BinariesDirectory)/hugo.tar.gz
     tar -xOvzf $(Build.BinariesDirectory)/hugo.tar.gz > $(Build.BinariesDirectory)/hugo
+    chmod +x $(Build.BinariesDirectory)/hugo
   displayName: 'Get Hugo'
 
 - script: |
