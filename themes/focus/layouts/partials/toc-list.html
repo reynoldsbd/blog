@@ -1,0 +1,10 @@
+{{ range $key, $value := . }}
+    <li>
+        <a href="#{{ $key }}">{{ $value.name }}</a>
+        {{ if $value.contents }}
+        <ul>
+            {{ partial "toc-list" $value.contents }}
+        </ul>
+        {{ end }}
+    </li>
+{{ end }}

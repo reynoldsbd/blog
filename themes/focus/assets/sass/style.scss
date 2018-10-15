@@ -1,0 +1,89 @@
+$accentColor: {{ .Param "accentColor" }};
+$accentColorLight: mix(white, $accentColor, 80%);
+$accentColorDark: darken(mix(gray, $accentColor, 30%), 10%);
+$accentColorDarker: darken(mix(gray, $accentColor, 60%), 10%);
+
+$backgroundGray: #DCDCDC;
+
+a {
+    color: $accentColorDark;
+
+    &:hover {
+        color: $accentColor;
+    }
+}
+
+article.content {
+
+    blockquote {
+        background-color: $backgroundGray;
+        border-left-color: $accentColorDarker;
+    }
+
+    h1:not(:first-child) {
+        font-size: 1.5rem;
+        margin-top: 5rem;
+    }
+
+    h2:not(:first-child) {
+        font-size: 1.25rem;
+        margin-top: 2.5rem;
+    }
+
+    h3:not(:first-child) {
+        font-size: 1.1rem;
+        margin-top: 2rem;
+    }
+
+    .highlight {
+        border-radius: 5px;
+    }
+}
+
+aside#custom-toc {
+    position: sticky;
+    top: 3em;
+
+    .menu-label {
+        // TODO: .menu-label has a distinctive style (upper case, different font, different size).
+        //       For consistency, I would like everywhere with that style to use font-weight 600,
+        //       not just when it appears in #custom-toc
+        font-weight: 600;
+    }
+
+    a {
+        padding: 0.3em 0.5em;
+    }
+
+    li ul {
+        margin: 0em 0em 0em 0.5em;
+        padding: 0em 0em 0em 0.5em;
+    }
+}
+
+code {
+    background-color: $backgroundGray;
+    border-radius: 3px;
+    color: inherit;
+}
+
+.card {
+
+    &.focus-summary {
+        border-radius: 5px;
+        margin-bottom: 24px;
+    }
+
+    a.card-header-title {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    a.read-more {
+        font-weight: bolder;
+
+        &:not(:hover) {
+            color: inherit;
+        }
+    }
+}

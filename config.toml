@@ -1,8 +1,11 @@
-# baseURL = "http://example.org/"
 languageCode = "en-us"
 title = "For Fun & Profit"
-theme = "focus"
-sectionPagesMenu = "main"
 pygmentsCodeFences = true
 relativeURLs = true
-uglyurls = true
+# uglyurls = true
+
+# Theme settings
+theme = "focus"
+sectionPagesMenu = "main"
+[params]
+    accentColor = "#FFA54C"

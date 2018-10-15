@@ -2,6 +2,21 @@
 title: "Arch ARM Images in WSL"
 date: 2018-09-01T08:55:55-07:00
 draft: false
+
+customToc:
+  disk-image-skeleton:
+    name: Disk Image Skeleton
+  populating-the-image:
+    name: Populating the Image
+    contents:
+      prepare-system-files:
+        name: Prepare System Files
+      create-partition-images:
+        name: Create Partition Images
+      splice-disk-image:
+        name: Splice Disk Image
+  writing-to-the-sd-card:
+    name: Writing to the SD Card
 ---
 
 Creating a bootable [Arch ARM][arch-arm] image on Windows is possible using the
