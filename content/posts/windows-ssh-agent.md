@@ -4,11 +4,13 @@ subtitle: "Part 1: Integrating ssh-agent with WSL"
 date: 2019-01-12T19:02:43-08:00
 draft: true
 ---
+TODO: simpler title
+TODO: "proxy" -> "bridge"
 
 
 TODO: do I need this sentence?
 [*ssh-agent(1)*][TODO] caches decrypted SSH keys for an extended period (i.e. the length of a user
-session) and make them available to [*ssh(1)*][TODO] sessions over a secure IPC channel.
+session) and makes them available to [*ssh(1)*][TODO] sessions over a secure IPC channel.
 
 Even though it uses a customized IPC implementation, the Windows port of ssh-agent can be trivially
 adapted to work with WSL.
@@ -22,31 +24,40 @@ by Rust and Tokio to bridge IPC connections from WSL clients.
 
 
 # Background: ssh-agent IPC
+TODO: compare/contrast Unix and Windows IPC implementations
 
 On Linux (and WSL), ssh-agent is accessed using the Unix socket given by `$SSH_AUTH_SOCK`. While
 this socket is usually furnished by the agent itself, any agent process started under WSL can't yet
 outlive the last open WSL console window. This restriction leads to a lot of redundant password
 entry.
 
-TODO: compare/contrast Unix and Windows IPC implementations
-In contrast, the Windows port uses a well-known named pipe as the system-wide IPC channel.
+In contrast, the Windows port uses a well-known named pipe as its system-wide IPC channel. But
+although named pipes provide a very different API, agent traffic ultimately uses the same
+communication protocol
 
 
 # Proxying Agent IPC with Rust
 
-TODO: introduction/overview
+With a bit of code, we can setup a simple proxy between the Windows agent's pipe and a Unix domain
+socket. Because the Windows agent uses the same underlying protocol as an unmodified ssh-agent, this
+proxy socket can be used transparently by WSL processes.
 
 Rust and Tokio are up to the task.
+TODO: "tokio-proxy ?" package enables proxying many different connection types, and the Azure IoT
+team has published crates that support using Tokio with both named pipes and the Windows
+implementation of Unix domain sockets.
+With these packages, it only takes a few lines of code to setup this proxy:
 
-TODO: "tokio-proxy ?" package enables proxying many different connection types. With the help of
-some crates published by the Azure IoT team, we can easily
+```rust
+// TODO: snippet to proxy np -> uds
+```
 
-Tokio provides [an example][TODO] that shows how to proxy two different "async streams (TODO:)".
+If you don't want to write such a program yourself, you can use ssh-agent-proxy.
 
 
 # Installing and Starting at Logon
 
-Install nprox using cargo:
+Use cargo to install nprox:
 
 ```powershell
 cargo install --git https://github.com/reynoldsbd/nprox
