@@ -161,8 +161,8 @@ each partition image byte-for-byte into the disk image, starting at the respecti
 offsets (from our partition table above):
 
 ```bash
-dd if=boot.img of=arch-arm.img bs=512 offset=2048 conv=notrunc
-dd if=root.img of=arch-arm.img bs=512 offset=1050624 conv=notrunc
+dd if=boot.img of=arch-arm.img bs=512 skip=2048 conv=notrunc
+dd if=root.img of=arch-arm.img bs=512 skip=1050624 conv=notrunc
 ```
 
 Note the use of `conv=notrunc`. This prevents _dd_ from truncating the output file after copying is
