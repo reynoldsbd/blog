@@ -12,36 +12,104 @@ day I will re-title this document "The GD32V Platform"...
 [alef-board-analoglamb]: https://www.analoglamb.com/product/polos-gd32v-alef-board-risc-v-mcu-board/
 
 
+# Bare-Bones Development
+
+<!-- todo: absolute minimum blinky -->
+
+
+# Development with Firmware Library
+
+GigaDevice provides an [open source firmware library][gd32vf103-fwlib-gh]
+complete with examples and project templates. The library includes high-level
+routines for interfacing with peripherals found on the MCU, as well as build
+scripts demonstrating how to compile and flash firmware for the device.
+
+To use the Makefile included with this library, the Nuclei RISC-V toolchain must
+be available in your path. This toolchain can be downloaded
+[here][nuclei-toolchain].
+
+[gd32vf103-fwlib-gh]: https://github.com/riscv-mcu/GD32VF103_Firmware_Library/
+[nuclei-toolchain]: https://nucleisys.com/download.php
+
+
 # Rust
 
 https://github.com/riscv-rust/riscv-rust-quickstart
+
 https://github.com/riscv-rust/gd32vf103-pac
+
 https://github.com/riscv-rust/gd32vf103xx-hal
+
 https://pramode.net/2019/10/07/rust-on-riscv-board-sipeed-longan-nano/
 
 
 # Flashing
 
-<!-- TODO: validate this information -->
-
 The MCU features a bootloader mode that can be used to load new firmware. To
 activate, hold the BOOT button while resetting the device. The bootloader
-supports two flashing protocols:
+supports several different mechanisms for flashing, which are detailed in the
+following sections.
 
-1. DFU, using [a modified version of dfu-utils][gd32-dfu-utils]
-   * The MCU does **not** comply with [the DFU specification][dfu-spec]
-   * On Windows, need to use [Zadig][zadig] to configure WinUSB
-2. STM32-compatible serial flashing, using [stm32flash][stm32flash]
+<!-- todo: is it possible to overwrite the bootloader? -->
 
-Firmware can also be flashed directly via JTAG using OpenOCD. This approach
-bypasses the bootloader.
+## USB Flashing with dfu-util
 
-<!-- TODO: is it possible to overwrite the bootloader? -->
+Using DFU is probably the most convenient way to flash, because it only requires
+a single USB cable and works on both Windows and Linux. But there's a catch: the
+bootloader technically does not comply with the [DFU specification][dfu-spec],
+which means the standard [dfu-util][dfu-util] tool will not work.
 
-[gd32-dfu-utils]: https://github.com/riscv-mcu/gd32-dfu-utils
+Instead, you must use [a customized version][gd32-dfu-utils] with support for
+the GD32V bootloader.
+
 [dfu-spec]: https://www.usb.org/sites/default/files/DFU_1.1.pdf
+[dfu-util]: http://dfu-util.sourceforge.net/
+[gd32-dfu-utils]: https://github.com/riscv-mcu/gd32-dfu-utils
+
+### Windows
+
+<!-- todo: needs validation -->
+
+A prebuilt binary of the customized dfu-util is available for Windows users
+under the GitHub Releases section.
+
+As noted on the releases page, Windows users will need to use [Zadig][zadig] to
+configure the WinUSB driver.
+
 [zadig]: https://zadig.akeo.ie/
-[stm32flash]: https://sourceforge.net/projects/stm32flash/
+
+### Other Platforms
+
+Non-Windows users will need to build this tool from source. It's not so hard;
+simply follow the instructions in the *INSTALL* file and deal with any missing
+dependencies as you go along.
+
+> Hint: On Ubuntu, you'll need to install the following dependency packages:
+>
+> ```
+> build-essential autoconf pkg-config libusb-1.0-0-dev
+> ```
+
+<!-- todo: figure out how to use doc/40-dfuse.rules -->
+
+### Usage
+
+Use the following command to flash the MCU. See `dfu-util -h`
+for an explanation of these parameters.
+
+```
+dfu-util -d 28e9:0189 -a 0 --dfuse-address 0x08000000:leave -D path/to/firmware.bin
+```
+
+## Serial Flashing with stm32flash
+
+TODO
+
+https://sourceforge.net/projects/stm32flash/
+
+## JTAG Flashing with OpenOCD
+
+TODO
 
 
 # GD32VF103 MCU
@@ -49,15 +117,6 @@ bypasses the bootloader.
 The MCU is a GigaDevice GD32VF103 series, which is essentially a RISC-V version
 of the GD32 family of MCUs, which in turn are nearly clones of the ubiquitous
 STM32 MCUs.
-
-## Firmware Library
-
-GigaDevice provides an [open source firmware library][gd32vf103-fwlib-gh]
-complete with examples and project templates. The library includes high-level
-routines for interfacing with peripherals found on the MCU, as well as build
-scripts demonstrating how to compile and flash firmware for the device.
-
-[gd32vf103-fwlib-gh]: https://github.com/riscv-mcu/GD32VF103_Firmware_Library/
 
 ## Documentation
 
