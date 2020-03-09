@@ -4,14 +4,14 @@
             {{ partial "content" . }}
         </div>
 
-    {{ if .Params.customToc }}
+    {{ if .Params.sections }}
         <div class="column is-narrow is-desktop">
             <aside id="custom-toc" class="menu">
                 <p class="menu-label">
                     On this page:
                 </p>
                 <ul class="menu-list">
-                    {{ partial "toc-list" .Params.customToc }}
+                    {{ partial "toc-list" .Params.sections }}
                 </ul>
             </aside>
         </div>

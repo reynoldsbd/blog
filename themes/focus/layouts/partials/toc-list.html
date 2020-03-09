@@ -1,9 +1,9 @@
-{{ range $key, $value := . }}
+{{ range . }}
     <li>
-        <a href="#{{ $key }}">{{ $value.name }}</a>
-        {{ if $value.contents }}
+        <a href="#{{ .anchor }}">{{ .title }}</a>
+        {{ if .sections }}
         <ul>
-            {{ partial "toc-list" $value.contents }}
+            {{ partial "toc-list" .sections }}
         </ul>
         {{ end }}
     </li>
