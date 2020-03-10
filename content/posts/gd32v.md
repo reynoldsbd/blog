@@ -4,8 +4,8 @@ date: 2020-03-08
 draft: false
 
 sections:
-- anchor: overview
-  title: Overview
+- anchor: background
+  title: Background
   sections:
   - anchor: official-documentation
     title: Official Documentation
@@ -39,7 +39,7 @@ documentation.
 [AnalogLamb]: https://www.analoglamb.com/
 
 
-# Overview
+# Background
 
 [GigaDevice] is a Chinese company widely known for flash memory and the GD32
 series of ARM microcontrollers. It recently introduced a new family of [RISC-V]
@@ -96,34 +96,60 @@ datasheets].
 
 * [Longan Nano (GD32VF103)] - Blog post from Kevin Sangeelee recording his
   experimentation with a Longan Nano development board.
+* [Rust on the Sipeed Longan Nano, an inexpensive RISC-V dev board] - Blog post
+  from Pramode C.E. about running Rust code on a Longan Nano
 
 [Longan Nano (GD32VF103)]: https://www.susa.net/wordpress/2019/10/longan-nano-gd32vf103/
+[Rust on the Sipeed Longan Nano, an inexpensive RISC-V dev board]: https://pramode.net/2019/10/07/rust-on-riscv-board-sipeed-longan-nano/
 
 
 # Firmware Library
 
-GigaDevice provides an [open source firmware library][gd32vf103-fwlib-gh]
-complete with examples and project templates. The library includes high-level
-routines for interfacing with peripherals found on the MCU, as well as build
-scripts demonstrating how to compile and flash firmware for the device.
+For traditional C/C++/ASM development, GigaDevice provides an [open source
+firmware library] complete with examples and project templates. The library
+includes higher level functions and macros for interfacing with the MCU's
+peripherals. It also provides a project template complete with a *Makefile*
+demonstrating how to compile and flash firmware.
 
-To use the Makefile included with this library, the Nuclei RISC-V toolchain must
-be available in your path. This toolchain can be downloaded
-[here][nuclei-toolchain].
+To use the Makefile included with this library, the [Nuclei RISC-V toolchain]
+must be available in your path. Also, at this time, [some modifications] to the
+template Makefile are necessary in order to make the project buildable.
 
-[gd32vf103-fwlib-gh]: https://github.com/riscv-mcu/GD32VF103_Firmware_Library/
-[nuclei-toolchain]: https://nucleisys.com/download.php
+[open source firmware library]: https://github.com/riscv-mcu/GD32VF103_Firmware_Library/
+[Nuclei RISC-V toolchain]: https://nucleisys.com/download.php
+[some modifications]: https://github.com/riscv-mcu/GD32VF103_Firmware_Library/pull/6
 
 
 # Rust
 
-https://github.com/riscv-rust/riscv-rust-quickstart
+For those wishing to use Rust: You are in luck! The current stable Rust compiler
+has support for producing native RV32IMAC code, and there are several open
+source crates available implementing platform initialization and access to the
+MCU's peripherals.
+
+To get started, enable the approprate Rust target:
+
+```
+rustup target add riscv32imac-unknown-none-elf
+```
+
+Create a new Cargo binary project, then add [*riscv-rt*] as a dependency and
+follow that crate's instructions to set up your project. The result is a minimal
+firmware program that boots but does nothing.
+
+To make the firmware do something interesting, we must use peripherals to
+interact with the outside world. We *could* implement our own logic and
+abstractions for communicating with these peripherals. However, the Embedded
+Rust community has coalesced around the [*embedded-hal*] crate as a common
+abstraction layer for accessing microcontroller peripherals, and implementations
+of this HAL exist for a great many MCUs, including the GD32VF103.
+
+[*riscv-rt*]: https://crates.io/crates/riscv-rt
+[*embedded-hal*]: https://crates.io/crates/embedded-hal
 
 https://github.com/riscv-rust/gd32vf103-pac
 
 https://github.com/riscv-rust/gd32vf103xx-hal
-
-https://pramode.net/2019/10/07/rust-on-riscv-board-sipeed-longan-nano/
 
 
 # Flashing
