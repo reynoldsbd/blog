@@ -28,7 +28,7 @@ jobs:
         extended: true
 
     - name: Build Static Content
-      run: hugo -D -b https://reynoldsbd.net/
+      run: hugo -b https://reynoldsbd.net/
 
     - name: Deploy to Web Server
       run: rsync -rt --delete ./public/* reynoldsbd.net:/usr/local/www/blog/
