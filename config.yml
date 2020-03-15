@@ -1,0 +1,21 @@
+title: Bobby Reynolds
+languageCode: en-us
+relativeURLs: true
+pygmentsCodeFences: true
+
+theme: focus
+params:
+  accentColor: '#FFA54C'
+
+menu:
+  main:
+  - identifier: posts
+    name: All Posts
+    title: All Posts
+    url: /posts/
+    weight: 1
+  - identifier: about
+    name: About
+    title: About
+    url: /about/
+    weight: 2
