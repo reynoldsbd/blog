@@ -1,0 +1,31 @@
+name: Build and Deploy
+on: push
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-18.04
+    steps:
+
+    # Set up resources
+    - name: Checkout Sources
+      uses: actions/checkout@v2
+    # todo: configure secrets
+    # - name: Install Deployment Key
+    #   uses: shimataro/ssh-key-action@v2
+    #   with:
+    #     key: ${{ secrets.DEPLOYMENT_KEY }}
+    #     name: id_ed25519
+    #     known_hosts: ${{ secrets.DEPLOYMENT_KNOWN_HOSTS }}
+    - name: Set Up Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 0.67.0
+        extended: true
+
+    # Build static content
+    - name: Build Static Content
+      run: hugo -D -b https://reynoldsbd.net/
+
+    # Deploy to web server
+    # todo: rsync
