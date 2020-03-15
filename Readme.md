@@ -7,5 +7,5 @@ To build and deploy manually:
 
 ```
 hugo -D -b https://reynoldsbd.net/
-rsync -rt --delete ./public/ corellia:/usr/local/www/blog
+rsync -rt --delete ./public/* reynoldsbd.net:/usr/local/www/blog/
 ```
