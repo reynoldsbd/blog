@@ -1,9 +1,11 @@
 This repo contains the source for my blog.
 
-# Testing Locally
+Commits to master are automatically built and deployed to the webserver hosting
+the blog. See ./.github/workflows/build-and-deploy.yml for details.
 
-The blog can be built and served locally using hugo:
+To build and deploy manually:
 
 ```
-hugo server -D
+hugo -D -b https://reynoldsbd.net/
+rsync -rt --delete ./public/ corellia:/usr/local/www/blog
 ```
