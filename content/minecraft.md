@@ -48,8 +48,6 @@ connection to this server. From the main menu:
 4. Enter `reynoldsbd.net` as the "Server Address"
 5. Click "Done"
 6. Click on the newly-configured multiplayer server, then click "Join Server"
-7. You will be prompted for a password. You should have been given the password
-  when you were told about this server.
 
 [Twitch client]: https://www.twitch.tv/downloads
 [This help article]: https://help.twitch.tv/s/article/How-to-Play-Minecraft-with-Twitch-App?language=en_US
