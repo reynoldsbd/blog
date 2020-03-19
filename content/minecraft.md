@@ -66,3 +66,12 @@ Individual mods:
 * [Big Reactors](https://ftbwiki.org/Big_Reactors)
 * [Thaumcraft](https://ftbwiki.org/Thaumcraft_4)
 * [Applied Energistics](https://ftbwiki.org/Applied_Energistics_2)
+
+
+# Troubleshooting
+
+## No Sound
+
+Be sure not to resize or move the Minecraft window until the game has finished
+loading. Doing so seems to disrupt part of the game initialization process,
+causing audio to fail.
