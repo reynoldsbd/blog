@@ -55,7 +55,7 @@
             </div>
         </section>
 
-        {{/* TODO: footer fixed to bottom */}}
+        {{ partial "footer" . }}
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         {{ $focusJs := resources.Get "js/focus.js" | minify }}

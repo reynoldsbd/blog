@@ -9,6 +9,7 @@ markup:
 
 theme: focus
 params:
+  author: Bobby Reynolds
   accentColor: '#FFA54C'
 
 menu:
