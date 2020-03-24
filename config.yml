@@ -1,7 +1,11 @@
 title: Bobby Reynolds
 languageCode: en-us
 relativeURLs: true
-pygmentsCodeFences: true
+
+markup:
+  highlight:
+    codeFences: true
+    guessSyntax: true
 
 theme: focus
 params:

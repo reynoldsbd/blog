@@ -35,8 +35,16 @@ article.content {
         margin-top: 2rem;
     }
 
+    // Code block styling
     .highlight {
+
+        // Rounded corners
         border-radius: 5px;
+
+        &:not(:last-child) {
+            // Little extra space below
+            margin-bottom: 2em;
+        }
     }
 }
 
