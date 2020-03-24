@@ -1,3 +1,5 @@
+@import "bulma/bulma.sass";
+
 $accentColor: {{ .Param "accentColor" }};
 $accentColorLight: mix(white, $accentColor, 80%);
 $accentColorDark: darken(mix(gray, $accentColor, 30%), 10%);

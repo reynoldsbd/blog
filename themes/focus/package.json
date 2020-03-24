@@ -1,0 +1,8 @@
+{
+    "description": "none",
+    "repository": "none",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "bulma": "0.7.1"
+    }
+}

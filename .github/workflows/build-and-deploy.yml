@@ -27,6 +27,10 @@ jobs:
         hugo-version: 0.67.0
         extended: true
 
+    - name: Install NPM Dependencies
+      run: npm ci
+      working-directory: ./themes/focus
+
     - name: Build Static Content
       run: hugo -b https://reynoldsbd.net/
 
