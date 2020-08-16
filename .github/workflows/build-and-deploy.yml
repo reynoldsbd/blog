@@ -3,6 +3,7 @@ on:
   push:
     branches:
     - master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,7 +25,7 @@ jobs:
     - name: Set Up Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-        hugo-version: 0.67.0
+        hugo-version: 0.74.3
         extended: true
 
     - name: Install NPM Dependencies
@@ -35,4 +36,4 @@ jobs:
       run: hugo -b https://reynoldsbd.net/
 
     - name: Deploy to Web Server
-      run: rsync -rt --delete ./public/* reynoldsbd.net:/usr/local/www/blog/
+      run: rsync -rt --delete ./public/* reynoldsbd.net:/var/www/blog/
